@@ -53,7 +53,7 @@ const Sidebar = ({ onClose }) => {
     return (
         <div className="w-64 bg-white h-screen border-r border-gray-200 flex flex-col fixed left-0 top-0 overflow-y-auto">
             <div className="p-6 border-b border-gray-100">
-                <h1 className="text-xl font-bold text-blue-600">UserInterface :</h1>
+                <h1 className="text-xl font-bold text-blue-600">UserInterface </h1>
             </div>
 
             <div className="py-4 flex-1">
