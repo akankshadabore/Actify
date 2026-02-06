@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { LayoutDashboard, User, Users, FileText, Upload, Contact, Briefcase, MessageSquare, ChevronDown, ChevronRight } from 'lucide-react';
+import { LayoutDashboard, User, Users, Contact, Briefcase, MessageSquare, ChevronDown, ChevronRight } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import clsx from 'clsx';
 
