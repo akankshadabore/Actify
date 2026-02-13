@@ -6,20 +6,18 @@ import { addAccount } from '../store/accountsSlice';
 
 
 const AccountForm = () => {
-    const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors } } = useForm({
         mode: 'onChange'
     });
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Initialize or fetch data if needed
     }, []);
 
     const onSubmit = (data) => {
         const formattedData = {
             ...data,
-            // Add any specific formatting if needed
         };
         dispatch(addAccount(formattedData));
         navigate('/');
@@ -46,8 +44,6 @@ const AccountForm = () => {
 
                 <form onSubmit={handleSubmit(onSubmit)} className="p-4 md:p-8">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-
-                        {/* Row 1: Names */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">
                                 First Name <span className="text-red-500">*</span>
@@ -90,7 +86,6 @@ const AccountForm = () => {
                             {errors.lastName && <span className="text-xs text-red-500 mt-1">{errors.lastName.message}</span>}
                         </div>
 
-                        {/* Row 2: Contact */}
                         <div className="md:col-span-1">
                             <label className="block text-sm font-medium text-gray-700 mb-1">
                                 Email <span className="text-red-500">*</span>
@@ -132,7 +127,6 @@ const AccountForm = () => {
                             {errors.phone && <span className="text-xs text-red-500 mt-1">{errors.phone.message}</span>}
                         </div>
 
-                        {/* Row 3: Address */}
                         <div className="col-span-1 md:col-span-3">
                             <label className="block text-sm font-medium text-gray-700 mb-1">
                                 Address <span className="text-red-500">*</span>
@@ -145,7 +139,6 @@ const AccountForm = () => {
                             {errors.address && <span className="text-xs text-red-500 mt-1">{errors.address.message}</span>}
                         </div>
 
-                        {/* Row 4: Location */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 col-span-1 md:col-span-3">
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">
