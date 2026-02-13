@@ -4,13 +4,16 @@ const initialAccounts = Array.from({ length: 100 }, (_, i) => {
     const id = i + 1;
     return {
         id,
-        name: `Account ${id}`,
+        firstName: ['Ashish', 'Rahul', 'Priya', 'Sneha', 'Amit'][Math.floor(Math.random() * 5)],
+        middleName: ['', 'Kumar', 'Singh', '', 'Dev'][Math.floor(Math.random() * 5)],
+        lastName: ['Sharma', 'Verma', 'Patel', 'Gupta', 'Yadav'][Math.floor(Math.random() * 5)],
         email: `user${id}@example.com`,
         phone: `98765432${id.toString().padStart(2, '0')}`,
-        website: `https://site${id}.com`,
-        industry: ['Technology', 'Finance', 'Healthcare', 'Retail'][Math.floor(Math.random() * 4)],
-        status: Math.random() > 0.3,
-        remark: `Sample remark for account ${id}`
+        address: `${id} Some Street, Some Area`,
+        pinCode: `1100${id.toString().padStart(2, '0')}`,
+        country: 'India',
+        state: ['Delhi', 'Maharashtra', 'Karnataka', 'UP'][Math.floor(Math.random() * 4)],
+        city: ['New Delhi', 'Mumbai', 'Bangalore', 'Lucknow'][Math.floor(Math.random() * 4)],
     };
 });
 

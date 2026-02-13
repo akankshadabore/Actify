@@ -1,5 +1,7 @@
 import { MoreHorizontal } from 'lucide-react';
 
+
+
 const AccountTableList = ({
     data,
     visibleColumns,
@@ -7,42 +9,46 @@ const AccountTableList = ({
     sortConfig,
     onSort
 }) => {
+    const columnConfig = {
+        'First Name': { key: 'firstName', width: '150px' },
+        'Middle Name': { key: 'middleName', width: '150px' },
+        'Last Name': { key: 'lastName', width: '150px' },
+        'Email': { key: 'email', width: '250px' },
+        'Phone': { key: 'phone', width: '150px' },
+        'Address': { key: 'address', width: '300px' },
+        'Pin Code': { key: 'pinCode', width: '120px' },
+        'Country': { key: 'country', width: '150px' },
+        'State': { key: 'state', width: '150px' },
+        'City': { key: 'city', width: '150px' }
+    };
+
     return (
         <div className="bg-white rounded-lg shadow overflow-hidden overflow-x-auto">
             <table className="min-w-[1200px] table-fixed divide-y divide-gray-200">
+                <colgroup>
+                    {allColumns.map((header) => {
+                        if (!visibleColumns[header]) return null;
+                        const width = columnConfig[header]?.width || '150px';
+                        return <col key={header} style={{ width }} />;
+                    })}
+                    <col style={{ width: '100px' }} />
+                </colgroup>
+
                 <thead className="bg-blue-50">
                     <tr>
                         {allColumns.map((header, idx) => {
                             if (!visibleColumns[header]) return null;
+                            const { key } = columnConfig[header];
 
-                            const keyMap = {
-                                'Account Name': 'name',
-                                'Email': 'email',
-                                'Phone No.': 'phone',
-                                'Website': 'website',
-                                'Industry': 'industry',
-                                'Account Status': 'status',
-                                'Remark': 'remark'
-                            };
-                            const widthMap = {
-                                'Account Name': 'w-[160px]',
-                                'Email': 'w-[220px]',
-                                'Phone No.': 'w-[150px]',
-                                'Website': 'w-[200px]',
-                                'Industry': 'w-[200px]',
-                                'Account Status': 'w-[130px]',
-                                'Remark': 'w-[250px]'
-                            };
-                            const key = keyMap[header];
                             return (
                                 <th
                                     key={idx}
-                                    className={`px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider cursor-pointer hover:bg-blue-100 ${widthMap[header]}`}
+                                    className="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider cursor-pointer hover:bg-blue-100 overflow-hidden"
                                     onClick={() => onSort(key)}
                                 >
                                     <div className="flex items-center gap-1 group">
-                                        {header}
-                                        <div className="flex flex-col w-3">
+                                        <span className="truncate" title={header}>{header}</span>
+                                        <div className="flex flex-col w-3 flex-shrink-0">
                                             {sortConfig.key === key ? (
                                                 <span className="text-[10px] leading-3">{sortConfig.direction === 'asc' ? '▲' : '▼'}</span>
                                             ) : (
@@ -53,38 +59,45 @@ const AccountTableList = ({
                                 </th>
                             );
                         })}
-                        <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider w-[100px]">Actions</th>
+                        <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider overflow-hidden">Actions</th>
                     </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                     {data.length > 0 ? (
                         data.map((item) => (
                             <tr key={item.id} className="hover:bg-gray-50 h-[60px]">
-                                {visibleColumns['Account Name'] && (
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 truncate w-[160px]" title={item.name}>{item.name}</td>
+                                {visibleColumns['First Name'] && (
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 truncate" title={item.firstName}>{item.firstName}</td>
+                                )}
+                                {visibleColumns['Middle Name'] && (
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 truncate">{item.middleName || '-'}</td>
+                                )}
+                                {visibleColumns['Last Name'] && (
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 truncate">{item.lastName}</td>
                                 )}
                                 {visibleColumns['Email'] && (
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 truncate w-[220px]" title={item.email}>{item.email}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 truncate" title={item.email}>{item.email}</td>
                                 )}
-                                {visibleColumns['Phone No.'] && (
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 truncate w-[150px]" title={item.phone}>{item.phone}</td>
+                                {visibleColumns['Phone'] && (
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 truncate">{item.phone}</td>
                                 )}
-                                {visibleColumns['Website'] && (
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-blue-600 hover:underline truncate w-[200px]" title={item.website}>
-                                        <a href={item.website} target="_blank" rel="noopener noreferrer">{item.website}</a>
-                                    </td>
+                                {visibleColumns['Address'] && (
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 truncate" title={item.address}>{item.address}</td>
                                 )}
-                                {visibleColumns['Industry'] && (
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 truncate w-[200px]" title={item.industry}>{item.industry || 'n/a'}</td>
+                                {visibleColumns['Pin Code'] && (
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 truncate">{item.pinCode}</td>
                                 )}
-                                {visibleColumns['Account Status'] && (
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 truncate w-[130px]">{item.status ? 'true' : 'false'}</td>
+                                {visibleColumns['Country'] && (
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 truncate">{item.country}</td>
                                 )}
-                                {visibleColumns['Remark'] && (
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 truncate w-[250px]" title={item.remark}>{item.remark || '-'}</td>
+                                {visibleColumns['State'] && (
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 truncate">{item.state}</td>
+                                )}
+                                {visibleColumns['City'] && (
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 truncate">{item.city}</td>
                                 )}
 
-                                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium w-[100px]">
+                                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <button className="text-gray-400 hover:text-gray-600">
                                         <MoreHorizontal size={20} />
                                     </button>
@@ -93,7 +106,7 @@ const AccountTableList = ({
                         ))
                     ) : (
                         <tr>
-                            <td colSpan="8" className="px-6 py-12 text-center text-gray-500">
+                            <td colSpan={allColumns.filter(c => visibleColumns[c]).length + 1} className="px-6 py-12 text-center text-gray-500">
                                 No results found
                             </td>
                         </tr>

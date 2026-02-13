@@ -15,15 +15,18 @@ const AccountTable = () => {
     const itemsPerPage = 10;
     const navigate = useNavigate();
 
-    const allColumns = ['Account Name', 'Email', 'Phone No.', 'Website', 'Industry', 'Account Status', 'Remark'];
+    const allColumns = ['First Name', 'Middle Name', 'Last Name', 'Email', 'Phone', 'Address', 'Pin Code', 'Country', 'State', 'City'];
     const [visibleColumns, setVisibleColumns] = useState({
-        'Account Name': true,
+        'First Name': true,
+        'Middle Name': true,
+        'Last Name': true,
         'Email': true,
-        'Phone No.': true,
-        'Website': true,
-        'Industry': true,
-        'Account Status': true,
-        'Remark': true
+        'Phone': true,
+        'Address': false,
+        'Pin Code': true,
+        'Country': true,
+        'State': true,
+        'City': true
     });
 
     const toggleColumn = (column) => {
